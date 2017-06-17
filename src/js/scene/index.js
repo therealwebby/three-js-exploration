@@ -2,6 +2,7 @@ import { Scene, Fog } from 'three';
 import Camera from './camera';
 import Renderer from './renderer';
 import Lighting from './lighting';
+import Sea from './objects/sea';
 
 export default class AppScene {
   constructor() {
@@ -10,8 +11,11 @@ export default class AppScene {
     this._setupCamera();
     this._addRenderer();
     this._addLighting();
+    this._addObjects();
 
     this._addListeners();
+
+    this.renderer.render(this.scene, this.camera);
   }
 
   _setBrowserDimensions() {
@@ -26,15 +30,21 @@ export default class AppScene {
   }
 
   _setupCamera() {
-    this.camera = new Camera(0, 100, 200, this.aspectRatio);
+    this.camera = new Camera(0, 100, 200, this.aspectRatio).camera;
   }
 
   _addRenderer() {
-    this.renderer = new Renderer(this.width, this.height);
+    this.renderer = new Renderer(this.width, this.height).renderer;
   }
 
   _addLighting() {
     this.lighting = new Lighting(this.scene);
+  }
+
+  _addObjects() {
+    const sea = new Sea();
+    sea.mesh.position.y = -600;
+    this.scene.add(sea.mesh);
   }
 
   _addListeners() {

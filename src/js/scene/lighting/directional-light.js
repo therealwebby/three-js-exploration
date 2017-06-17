@@ -11,18 +11,12 @@ export default class DirectionalLight {
   }
 
   _setCameraSettings() {
-    this.light.shadow.camera = Object.assign(
-      {},
-      this.light.shadow.camera,
-      {
-        left: -400,
-        right: 400,
-        top: 400,
-        bottom: -400,
-        near: 1,
-        far: 1000
-      }
-    );
+    this.light.shadow.camera.left = -400;
+    this.light.shadow.camera.right = 400;
+    this.light.shadow.camera.top = 400;
+    this.light.shadow.camera.bottom = -400;
+    this.light.shadow.camera.near = 1;
+    this.light.shadow.camera.far = 1000;
   }
 
   _setShadowResolution() {
