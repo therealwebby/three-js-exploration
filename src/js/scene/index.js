@@ -1,6 +1,6 @@
+import { Scene, Fog } from 'three';
 import Camera from './camera';
 import Renderer from './renderer';
-import { Scene, Fog } from 'three';
 
 export default class AppScene {
   constructor() {
@@ -22,7 +22,7 @@ export default class AppScene {
   }
 
   _setupScene() {
-    this.scene = new Scene;
+    this.scene = new Scene();
     this.scene.fog = new Fog(0xf7d9aa, 100, 950);
   }
 
@@ -35,6 +35,6 @@ export default class AppScene {
       this._setBrowserDimensions();
       this.camera.updateDimensions(this.aspectRatio);
       this.renderer.updateDimensions(this.width, this.height);
-    }, false)
+    }, false);
   }
 }

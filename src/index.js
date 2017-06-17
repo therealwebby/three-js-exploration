@@ -7,9 +7,9 @@ class App {
 
   _addListeners() {
     document.addEventListener('DOMContentLoaded', () => {
-      this.appScene = new AppScene;
+      this.appScene = new AppScene();
     });
   }
 }
 
-const app =  new App;
+const app = new App(); // eslint-disable-line no-unused-vars

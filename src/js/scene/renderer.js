@@ -5,7 +5,7 @@ export default class Renderer {
     this.renderer = new WebGLRenderer({
       alpha: true,
       antialias: true
-    })
+    });
 
     this.renderer.setSize(width, height);
     this.renderer.shadowMap.enabled = true;
