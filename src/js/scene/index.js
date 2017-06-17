@@ -1,6 +1,7 @@
 import { Scene, Fog } from 'three';
 import Camera from './camera';
 import Renderer from './renderer';
+import Lighting from './lighting';
 
 export default class AppScene {
   constructor() {
@@ -8,6 +9,8 @@ export default class AppScene {
     this._setupScene();
     this._setupCamera();
     this._addRenderer();
+    this._addLighting();
+
     this._addListeners();
   }
 
@@ -17,17 +20,21 @@ export default class AppScene {
     this.aspectRatio = this.width / this.height;
   }
 
-  _setupCamera() {
-    this.camera = new Camera(0, 100, 200, this.aspectRatio);
-  }
-
   _setupScene() {
     this.scene = new Scene();
     this.scene.fog = new Fog(0xf7d9aa, 100, 950);
   }
 
+  _setupCamera() {
+    this.camera = new Camera(0, 100, 200, this.aspectRatio);
+  }
+
   _addRenderer() {
     this.renderer = new Renderer(this.width, this.height);
+  }
+
+  _addLighting() {
+    this.lighting = new Lighting(this.scene);
   }
 
   _addListeners() {

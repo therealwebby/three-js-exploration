@@ -1,5 +1,4 @@
 import AppScene from './js/scene';
-import Lighting from './js/lighting';
 
 class App {
   constructor() {
@@ -9,7 +8,6 @@ class App {
   _addListeners() {
     document.addEventListener('DOMContentLoaded', () => {
       this.mainScene = new AppScene();
-      this.lighting = new Lighting(this.mainScene);
     });
   }
 }
