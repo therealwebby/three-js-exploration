@@ -2,7 +2,9 @@ import { Scene, Fog } from 'three';
 import Camera from './camera';
 import Renderer from './renderer';
 import Lighting from './lighting';
+
 import Sea from './objects/sea';
+import Sky from './objects/sky';
 
 export default class AppScene {
   constructor() {
@@ -12,10 +14,11 @@ export default class AppScene {
     this._addRenderer();
     this._addLighting();
     this._addObjects();
+    this._animationLoop();
 
     this._addListeners();
 
-    this.renderer.render(this.scene, this.camera);
+    this.renderer.instance.render(this.scene, this.camera.camera);
   }
 
   _setBrowserDimensions() {
@@ -30,11 +33,11 @@ export default class AppScene {
   }
 
   _setupCamera() {
-    this.camera = new Camera(0, 100, 200, this.aspectRatio).camera;
+    this.camera = new Camera(0, 100, 200, this.aspectRatio);
   }
 
   _addRenderer() {
-    this.renderer = new Renderer(this.width, this.height).renderer;
+    this.renderer = new Renderer(this.width, this.height);
   }
 
   _addLighting() {
@@ -42,9 +45,21 @@ export default class AppScene {
   }
 
   _addObjects() {
-    const sea = new Sea();
-    sea.mesh.position.y = -600;
-    this.scene.add(sea.mesh);
+    this.sea = new Sea();
+    this.sky = new Sky();
+
+    this.sea.mesh.position.y = -600;
+    this.sky.mesh.position.y = -600;
+
+    this.scene.add(this.sky.mesh);
+    this.scene.add(this.sea.mesh);
+  }
+
+  _animationLoop() {
+    this.sky.mesh.rotation.z += 0.005;
+    this.sea.mesh.rotation.z += 0.005;
+    this.renderer.instance.render(this.scene, this.camera.camera);
+    window.requestAnimationFrame(() => this._animationLoop());
   }
 
   _addListeners() {

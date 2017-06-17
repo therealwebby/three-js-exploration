@@ -2,19 +2,19 @@ import { WebGLRenderer } from 'three';
 
 export default class Renderer {
   constructor(width, height) {
-    this.renderer = new WebGLRenderer({
+    this.instance = new WebGLRenderer({
       alpha: true,
       antialias: true
     });
 
-    this.renderer.setSize(width, height);
-    this.renderer.shadowMap.enabled = true;
+    this.instance.setSize(width, height);
+    this.instance.shadowMap.enabled = true;
 
     const container = document.getElementById('world');
-    container.appendChild(this.renderer.domElement);
+    container.appendChild(this.instance.domElement);
   }
 
   updateDimensions(width, height) {
-    this.renderer.setSize(width, height);
+    this.instance.setSize(width, height);
   }
 }
